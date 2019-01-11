@@ -12,7 +12,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
@@ -36,7 +38,7 @@ public class RestClientService {
 
   //web service resources endpoints
   private static final String GET_URL_ONE = "https://developers.zomato.com/api/v2.1/restaurant?res_id=";
-  private static final String GET_URL_ALL = "https://developers.zomato.com/api/v2.1/search?entity_id=279&entity_type=city&cuisines=25";
+  private static final String GET_URL_ALL = "https://developers.zomato.com/api/v2.1/search?entity_id=279&entity_type=city&cuisines=";
   
 
   //define an argument constructor, pass in the RestTemplate object
@@ -47,7 +49,7 @@ public class RestClientService {
       this.restTemplate = restTemplate;
   }
 
-  public List<Restaurant> findAllRestaurants() throws JsonParseException, JsonMappingException, IOException{
+  public List<Restaurant> findAllRestaurants(String id) throws JsonParseException, JsonMappingException, IOException{
 	  
 	//Set the headers you need send
 	  final HttpHeaders headers = new HttpHeaders();
@@ -66,14 +68,14 @@ public class RestClientService {
 //	    return transactions;
 	    
 	    
-	    ResponseEntity<JsonNode> transResponse = restTemplate.exchange(GET_URL_ALL, HttpMethod.GET,
+	    ResponseEntity<JsonNode> transResponse = restTemplate.exchange(GET_URL_ALL+id, HttpMethod.GET,
 	            entity, JsonNode.class);
 	    
 	    System.out.println("yeah");
 	    System.out.println(transResponse);
 	    
-	    JsonNode transResult = transResponse.getBody().path("restaurants"); 
-	    
+	    JsonNode transResult = transResponse.getBody().path("restaurants");
+	       
 	    System.out.println("test");
 	    System.out.println(transResult);
 	    
@@ -83,12 +85,17 @@ public class RestClientService {
 	    om.enable(SerializationFeature.INDENT_OUTPUT);
 	    om.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
     	
-    	TypeReference<List<Restaurant>> mapType = new TypeReference<List<Restaurant>>() {};
+    	TypeReference<List <Map <String, Restaurant> >> mapType = new TypeReference<List <Map <String, Restaurant> >>() {};
     	
-    	List<Restaurant> restaurants_searched = om.readValue(transResult.toString(), mapType);
+    	List <Map <String, Restaurant>> restaurants_searched = om.readValue(transResult.toString(), mapType);
     	
+    	List <Restaurant> restaurants = new ArrayList<> ();
     	
-    	return restaurants_searched;
+    	for ( Map <String, Restaurant> restaurants_list: restaurants_searched) {
+    		restaurants.add(restaurants_list.get("restaurant"));
+    	}
+    	
+    	return restaurants;
 	    
   }
  

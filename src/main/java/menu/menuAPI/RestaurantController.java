@@ -27,9 +27,9 @@ public class RestaurantController {
        this.service = service;
     }
     
-    @RequestMapping(value = "/restaurants/", method = RequestMethod.GET,produces = "application/json")
-    public List<Restaurant> getRestaurantList() throws JsonParseException, JsonMappingException, IOException {
-      return service.findAllRestaurants();
+    @RequestMapping(value = "/restaurants/cuisine/{id}", method = RequestMethod.GET,produces = "application/json")
+    public List<Restaurant> getRestaurantList(@PathVariable("id") String id) throws JsonParseException, JsonMappingException, IOException {
+      return service.findAllRestaurants(id);
     }
 
     @RequestMapping(value = "/restaurants/{id}", method = RequestMethod.GET, produces = "application/json")
@@ -37,9 +37,7 @@ public class RestaurantController {
       Restaurant restaurant = service.findRestaurantById(id);
 	return restaurant;
     }
-    
-   
-    
- 
+     
+      
 
 }
