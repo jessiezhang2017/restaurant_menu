@@ -58,15 +58,7 @@ public class RestClientService {
 	 //Create a new HttpEntity
 	  final HttpEntity<String> entity = new HttpEntity<String>(headers); 
 	  
-//	  ResponseEntity<List<Restaurant>> transResponse = restTemplate.exchange(GET_URL_ALL, HttpMethod.GET,
-//	            entity, new ParameterizedTypeReference<List<Restaurant>>() {
-//	            });
-//
-//	    List<Restaurant> transactions = transResponse.getBody();
-//	    
-//	    System.out.println(transactions);
-//	    return transactions;
-	    
+    
 	    
 	    ResponseEntity<JsonNode> transResponse = restTemplate.exchange(GET_URL_ALL+id, HttpMethod.GET,
 	            entity, JsonNode.class);
@@ -112,9 +104,7 @@ public class RestClientService {
 	  ResponseEntity<String> transResponse = restTemplate.exchange(GET_URL_ONE+id, HttpMethod.GET, entity, String.class);
 	 
 	  String transaction = transResponse.getBody();
-	
-	  System.out.println(transaction);
-	  
+	 
   
 	  ObjectMapper om = new ObjectMapper();
 	  
@@ -123,7 +113,7 @@ public class RestClientService {
 	 
 	  Restaurant restaurant_selected = om.readValue(transaction, Restaurant.class);
 	  
-	  System.out.println(restaurant_selected.getZomatoId());
+ 
 	  
 	  return restaurant_selected;
 	 
