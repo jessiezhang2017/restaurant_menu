@@ -7,7 +7,7 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 
 public interface MenusRepository extends MongoRepository<Menus, String> {
-  Menus findBy_id(ObjectId _id);
+  Menus findBy_id(String _id);
   List<Menus> findByRestaurantId(String restaurantId);
   
 

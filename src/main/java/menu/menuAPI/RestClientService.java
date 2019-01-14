@@ -63,12 +63,12 @@ public class RestClientService {
 	    ResponseEntity<JsonNode> transResponse = restTemplate.exchange(GET_URL_ALL+id, HttpMethod.GET,
 	            entity, JsonNode.class);
 	    
-	    System.out.println("yeah");
+	    
 	    System.out.println(transResponse);
 	    
 	    JsonNode transResult = transResponse.getBody().path("restaurants");
 	       
-	    System.out.println("test");
+	  
 	    System.out.println(transResult);
 	    
 	    ObjectMapper om = new ObjectMapper();

@@ -27,7 +27,7 @@ public class MenusController {
   }
 
   @GetMapping("/{id}")
-  public Menus getMenuBy_id(@PathVariable("id") ObjectId id) {
+  public Menus getMenuBy_id(@PathVariable("id") String id) {
 	  
     return repository.findBy_id(id);
   }
@@ -53,7 +53,7 @@ public class MenusController {
   }
   
   @DeleteMapping("/{id}")
-  public void deleteMenu(@PathVariable ObjectId id) {
+  public void deleteMenu(@PathVariable String id) {
     repository.delete(repository.findBy_id(id));
   }
 }

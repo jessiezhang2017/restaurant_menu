@@ -13,7 +13,7 @@ public class Review {
     private int rating;
     private String comment;
     
-//    private boolean approved;
+    private String dishName;
 
     protected Review() {
     }
@@ -25,7 +25,7 @@ public class Review {
         this.userName = userName;
         this.rating = rating;
         this.comment = comment;
-//        this.approved = approved;
+        this.dishName = "";
     }
     
     public String get_id() { return _id.toHexString(); }
@@ -37,6 +37,14 @@ public class Review {
     
     public void setDishId(String id) {
         this.dishId = id;
+    }
+    
+    public String getDishName() {
+        return dishName;
+    }
+    
+    public void setDishName(String name) {
+        this.dishName = name;
     }
     
     public String getUserId() {

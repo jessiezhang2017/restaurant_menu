@@ -12,14 +12,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectWriter;
+import com.fasterxml.jackson.databind.annotation.JsonAppend;
+
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/reviews")
 public class ReviewContoller {
 	@Autowired
 	  private ReviewRepository repository;
+	@Autowired
+	  private MenusRepository menuRepo;
 	  
 	  @GetMapping("/")
 	  public List<Review> getAllReview() {
@@ -33,8 +40,25 @@ public class ReviewContoller {
 	  
 	  @GetMapping("/users/{userId}")
 	  public List<Review> getReviewByUserId(@PathVariable("userId") String userId) {
-
-	    return repository.findByUserId(userId);
+       
+		List<Review> reviews = repository.findByUserId(userId);
+		
+		if (reviews.size() > 0) {
+		
+		    for (Review review : reviews) {
+		   
+		    	String dishid = review.getDishId();
+		    
+		    	Menus item = menuRepo.findBy_id(dishid);
+		  
+		    	String name = item.getName();
+		 
+		    	review.setDishName(item.getName());
+		    	
+		    }
+		}
+		System.out.println(reviews);
+	    return reviews;
 	  }
 	  
 	  @PutMapping("/{id}")
@@ -56,3 +80,5 @@ public class ReviewContoller {
 	  }
 
 }
+
+
