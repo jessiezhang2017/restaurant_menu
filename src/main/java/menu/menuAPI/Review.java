@@ -7,9 +7,9 @@ public class Review {
 	@Id
 	private ObjectId _id;
 	
-	private String user_id;
-	private String dish_id;
-    private String user_name;
+	private String userId;
+	private String dishId;
+    private String userName;
     private int rating;
     private String comment;
     
@@ -18,11 +18,11 @@ public class Review {
     protected Review() {
     }
 
-    public Review(ObjectId _id, String dish_id, String user_id, String user_name, int rating, String comment) {
+    public Review(ObjectId _id, String dishId, String userId, String userName, int rating, String comment) {
     	this._id = _id;
-    	this.dish_id = dish_id;
-    	this.user_id = user_id;
-        this.user_name = user_name;
+    	this.dishId = dishId;
+    	this.userId = userId;
+        this.userName = userName;
         this.rating = rating;
         this.comment = comment;
 //        this.approved = approved;
@@ -31,28 +31,28 @@ public class Review {
     public String get_id() { return _id.toHexString(); }
     public void set_id(ObjectId _id) { this._id = _id; }
     
-    public String getDish_id() {
-        return dish_id;
+    public String getDishId() {
+        return dishId;
     }
     
-    public void setDish_id(String id) {
-        this.dish_id = id;
+    public void setDishId(String id) {
+        this.dishId = id;
     }
     
-    public String getUser_id() {
-        return user_id;
+    public String getUserId() {
+        return userId;
     }
     
-    public void setUser_id(String id) {
-        this.user_id = id;
+    public void setUserId(String id) {
+        this.userId = id;
     }
 
-    public String getUser_name() {
-        return user_name;
+    public String getUserName() {
+        return userName;
     }
     
-    public void setUser_name(String name) {
-        this.user_name = name;
+    public void setUserName(String name) {
+        this.userName = name;
     }
 
     public int getRating() {

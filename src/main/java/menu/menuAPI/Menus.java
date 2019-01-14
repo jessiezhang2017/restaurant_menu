@@ -23,7 +23,7 @@ public class Menus {
   }
 
   
-  public Menus(ObjectId _id, String name, double price, String restaurantId) {
+  public Menus(ObjectId _id, String name,  String restaurantId) {
     this._id = _id;
     this.name = name;
     
