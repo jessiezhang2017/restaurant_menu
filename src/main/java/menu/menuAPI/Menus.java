@@ -10,12 +10,11 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 public class Menus {
   @Id
-  public ObjectId _id;
+  private ObjectId _id;
   
-  public String name;
-  public double price;
-  
+  private String name;
 
+  private String restaurantId;
   private List<Review> reviews;
   
   // Constructors 
@@ -24,11 +23,12 @@ public class Menus {
   }
 
   
-  public Menus(ObjectId _id, String name, double price, List<Review> reviews) {
+  public Menus(ObjectId _id, String name, double price, String restaurantId) {
     this._id = _id;
     this.name = name;
-    this.price = price;
-    this.reviews = reviews;
+    
+    this.restaurantId = restaurantId;
+    
   }
   
   // ObjectId needs to be converted to string
@@ -38,11 +38,26 @@ public class Menus {
   public String getName() { return name; }
   public void setName(String name) { this.name = name; }
   
-  public double getPrice() { return price; }
-  public void setPrice(double price) { this.price = price; }
+  
+  public String getRestaurantId() { return restaurantId; }
+  public void setRestaurantId(String restaurantId) { this.restaurantId = restaurantId; }
   
   public List<Review> getReviews() {
       return this.reviews;
   }
-  public void addReview(Review review) { this.reviews.add(review); }
+  public void addReview(Review review) { 
+	  this.reviews.add(review); 
+  }
+  
+  public double getOverallRating() {
+	  double sum = 0;
+	  for (Review rev:reviews) {
+		  sum = rev.getRating();
+	  }
+	  
+	  double average_rate = sum / reviews.size();
+	  return average_rate;
+	  
+  }
+  
 }
