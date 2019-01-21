@@ -20,6 +20,8 @@ import java.util.List;
 public class MenusController {
   @Autowired
   private MenusRepository repository;
+  @Autowired
+  private ReviewRepository reviewRepo;
   
   @GetMapping( "/")
   public List<Menus> getAllMenus() {
@@ -34,14 +36,29 @@ public class MenusController {
   
   @GetMapping("/restaurants/{restaurantId}")
   public List<Menus> getMenusByRestaurantId(@PathVariable("restaurantId") String restaurantId) {
-
-    return repository.findByRestaurantId(restaurantId);
+    
+//    return repository.findByRestaurantId(restaurantId);
+	  List<Menus> dishes = repository.findByRestaurantId(restaurantId);
+	  
+	  if (dishes.size() > 0) {
+			
+		    for (Menus dish : dishes) {
+		   
+		    	String dishid = dish.get_id();
+		    
+		    	List<Review> reviewList = reviewRepo.findByDishId(dishid);
+		    	dish.setReviews(reviewList);	 	    	
+		    	
+		    }
+		}
+		System.out.println(dishes);
+	    return dishes;
   }
   
   @PutMapping(value = "/{id}")
   public void modifyMenuById(@PathVariable("id") ObjectId id, @Valid @RequestBody Menus menus) {
     menus.set_id(id);
-   
+    
     repository.save(menus);
   }
   

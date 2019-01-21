@@ -14,6 +14,7 @@ public class Review {
     private String comment;
     
     private String dishName;
+    private String restaurantName;
 
     protected Review() {
     }
@@ -26,6 +27,7 @@ public class Review {
         this.rating = rating;
         this.comment = comment;
         this.dishName = "";
+        this.restaurantName ="";
     }
     
     public String get_id() { return _id.toHexString(); }
@@ -45,6 +47,14 @@ public class Review {
     
     public void setDishName(String name) {
         this.dishName = name;
+    }
+    
+    public String getRestaurantName() {
+        return restaurantName;
+    }
+    
+    public void setRestaurantName(String name) {
+        this.restaurantName = name;
     }
     
     public String getUserId() {

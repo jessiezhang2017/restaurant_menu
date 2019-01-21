@@ -13,7 +13,7 @@ public class Menus {
   private ObjectId _id;
   
   private String name;
-
+  private String restaurantName;
   private String restaurantId;
   private List<Review> reviews;
   
@@ -23,12 +23,12 @@ public class Menus {
   }
 
   
-  public Menus(ObjectId _id, String name,  String restaurantId) {
-    this._id = _id;
+  public Menus( String name,  String restaurantId, String restaurantName) {
+   
     this.name = name;
-    
+    this.restaurantName = restaurantName;
     this.restaurantId = restaurantId;
-    
+   
   }
   
   // ObjectId needs to be converted to string
@@ -38,6 +38,9 @@ public class Menus {
   public String getName() { return name; }
   public void setName(String name) { this.name = name; }
   
+  public String getRestaurantName() { return restaurantName; }
+  public void setRestaurantName(String name) { this.restaurantName = name; }
+  
   
   public String getRestaurantId() { return restaurantId; }
   public void setRestaurantId(String restaurantId) { this.restaurantId = restaurantId; }
@@ -45,6 +48,10 @@ public class Menus {
   public List<Review> getReviews() {
       return this.reviews;
   }
+  public void setReviews(List<Review> reviews) {
+      this.reviews = reviews;
+  }
+  
   public void addReview(Review review) { 
 	  this.reviews.add(review); 
   }
@@ -52,11 +59,11 @@ public class Menus {
   public double getOverallRating() {
 	  double sum = 0;
 	  for (Review rev:reviews) {
-		  sum = rev.getRating();
+		  sum += rev.getRating();
 	  }
 	  
-	  double average_rate = sum / reviews.size();
-	  return average_rate;
+	  double averageRate = sum / reviews.size();
+	  return averageRate;
 	  
   }
   

@@ -51,7 +51,30 @@ public class ReviewContoller {
 		    
 		    	Menus item = menuRepo.findBy_id(dishid);
 		  
-		    	String name = item.getName();
+		    	review.setRestaurantName(item.getRestaurantName());
+		 
+		    	review.setDishName(item.getName());
+		    	
+		    }
+		}
+		System.out.println(reviews);
+	    return reviews;
+	  }
+	  
+	  @GetMapping("/dishes/{dishId}")
+	  public List<Review> getReviewByDishId(@PathVariable("dishId") String dishId) {
+       
+		List<Review> reviews = repository.findByDishId(dishId);
+		
+		if (reviews.size() > 0) {
+		
+		    for (Review review : reviews) {
+		   
+		    	String dishid = review.getDishId();
+		    
+		    	Menus item = menuRepo.findBy_id(dishid);
+		  
+		    	review.setRestaurantName(item.getRestaurantName());
 		 
 		    	review.setDishName(item.getName());
 		    	
@@ -78,6 +101,8 @@ public class ReviewContoller {
 	  public void deleteReview(@PathVariable ObjectId id) {
 	    repository.delete(repository.findBy_id(id));
 	  }
+	  
+	 
 
 }
 
