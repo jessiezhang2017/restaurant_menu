@@ -39,7 +39,7 @@ public class RestClientService {
   //web service resources endpoints
   private static final String GET_URL_ONE = "https://developers.zomato.com/api/v2.1/restaurant?res_id=";
   private static final String GET_URL_ALL = "https://developers.zomato.com/api/v2.1/search?entity_id=279&entity_type=city&cuisines=";
-  
+  private static final String GET_URL2 = "&start=";
 
   //define an argument constructor, pass in the RestTemplate object
   //and Autowire it
@@ -49,7 +49,7 @@ public class RestClientService {
       this.restTemplate = restTemplate;
   }
 
-  public List<Restaurant> findAllRestaurants(String id) throws JsonParseException, JsonMappingException, IOException{
+  public List<Restaurant> findAllRestaurants(String id, String start) throws JsonParseException, JsonMappingException, IOException{
 	  
 	//Set the headers you need send
 	  final HttpHeaders headers = new HttpHeaders();
@@ -60,7 +60,7 @@ public class RestClientService {
 	  
     
 	    
-	    ResponseEntity<JsonNode> transResponse = restTemplate.exchange(GET_URL_ALL+id, HttpMethod.GET,
+	    ResponseEntity<JsonNode> transResponse = restTemplate.exchange(GET_URL_ALL+id+GET_URL2+start, HttpMethod.GET,
 	            entity, JsonNode.class);
 	    
 	    

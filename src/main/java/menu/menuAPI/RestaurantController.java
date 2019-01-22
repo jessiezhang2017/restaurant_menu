@@ -27,9 +27,9 @@ public class RestaurantController {
        this.service = service;
     }
     
-    @RequestMapping(value = "/restaurants/cuisine/{id}", method = RequestMethod.GET,produces = "application/json")
-    public List<Restaurant> getRestaurantList(@PathVariable("id") String id) throws JsonParseException, JsonMappingException, IOException {
-      return service.findAllRestaurants(id);
+    @RequestMapping(value = "/restaurants/cuisine/{id}/{start}", method = RequestMethod.GET,produces = "application/json")
+    public List<Restaurant> getRestaurantList(@PathVariable("id") String id, @PathVariable("start") String start) throws JsonParseException, JsonMappingException, IOException {
+      return service.findAllRestaurants(id, start);
     }
 
     @RequestMapping(value = "/restaurants/{id}", method = RequestMethod.GET, produces = "application/json")
