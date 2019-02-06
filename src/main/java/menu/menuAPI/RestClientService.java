@@ -23,7 +23,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.core.type.TypeReference;
-
+import io.github.cdimascio.dotenv.Dotenv;
 
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -53,7 +53,11 @@ public class RestClientService {
 	  
 	//Set the headers you need send
 	  final HttpHeaders headers = new HttpHeaders();
-	  headers.set("user-key", "e0da88217d6a3bdb53e6142fee4de191");
+	  
+	  Dotenv userkey = Dotenv.load();
+	  String key=userkey.get("USER_KEY");
+//	  headers.set("user-key", "e0da88217d6a3bdb53e6142fee4de191");
+	  headers.set("user-key", key);
 	  
 	 //Create a new HttpEntity
 	  final HttpEntity<String> entity = new HttpEntity<String>(headers); 
