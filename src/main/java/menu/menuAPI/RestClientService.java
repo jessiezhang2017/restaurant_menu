@@ -54,9 +54,10 @@ public class RestClientService {
 	//Set the headers you need send
 	  final HttpHeaders headers = new HttpHeaders();
 	  
-
-	  headers.set("user-key", "e0da88217d6a3bdb53e6142fee4de191");
-
+	  String key = System.getenv("USER_KEY");
+	  headers.set("user-key", key);
+	  
+//	  headers.set("user-key", "e0da88217d6a3bdb53e6142fee4de191");
 	  
 	 //Create a new HttpEntity
 	  final HttpEntity<String> entity = new HttpEntity<String>(headers); 
