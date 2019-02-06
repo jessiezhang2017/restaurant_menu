@@ -56,8 +56,9 @@ public class RestClientService {
 	  
 	  Dotenv userkey = Dotenv.load();
 	  String key=userkey.get("USER_KEY");
-//	  headers.set("user-key", "e0da88217d6a3bdb53e6142fee4de191");
-	  headers.set("user-key", key);
+	  System.out.println(key);
+	  headers.set("user-key", "e0da88217d6a3bdb53e6142fee4de191");
+//	  headers.set("user-key", key);
 	  
 	 //Create a new HttpEntity
 	  final HttpEntity<String> entity = new HttpEntity<String>(headers); 
